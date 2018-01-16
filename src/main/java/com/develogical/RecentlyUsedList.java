@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class RecentlyUsedList {
-
-    private ArrayList list;
+    private ArrayList<Integer> list;
 
     public RecentlyUsedList(){
         list = new ArrayList();
@@ -16,14 +15,18 @@ public class RecentlyUsedList {
         return list.isEmpty();
     }
 
-    public void add(int i) {
-        ArrayList copy = new ArrayList();
-        copy.add(i);
-        copy.addAll(list);
-        list = copy;
+    public void add(int item) {
+        if(list.contains(item)) {
+            list.remove(new Integer(item));
+        }
+        list.add(0,item);
     }
 
     public <T> T get(int i) {
         return (T)list.get(i);
+    }
+
+    public int size() {
+        return list.size();
     }
 }

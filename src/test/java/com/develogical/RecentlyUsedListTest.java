@@ -2,7 +2,10 @@ package com.develogical;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -28,7 +31,6 @@ public class RecentlyUsedListTest {
         RecentlyUsedList list = new RecentlyUsedList();
         list.add(1);
         assertThat(1,equalTo(list.get(0)));
-
     }
 
     @Test
@@ -40,4 +42,14 @@ public class RecentlyUsedListTest {
         assertThat(10, equalTo(list.get(0)));
     }
 
+    @Test
+    public void duplicateInsertionsShouldBeMovedToTop() {
+        RecentlyUsedList list = new RecentlyUsedList();
+        list.add(5);
+        list.add(7);
+        list.add(10);
+        list.add(7);
+        assertThat(list.size(), equalTo(3));
+        assertThat(7, equalTo(list.get(0)));
+    }
 }
